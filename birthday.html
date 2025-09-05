@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Vijay 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff6a88, #ff99ac, #fad0c4);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      overflow-x: hidden;
+      overflow-y: auto;
+      text-align: center;
+      color: #fff;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50% }
+      50% { background-position: 100% 50% }
+      100% { background-position: 0% 50% }
+    }
+
+    /* Lock Screen */
+    #lock-screen {
+      min-height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      background:linear-gradient(135deg,#ff6f91,#845EC2,#FF9671,#FFC75F);
+      background-size:400% 400%;
+      animation: gradientMove 10s ease infinite;
+      color:#fff; text-align:center; padding:20px;
+    }
+    @keyframes gradientMove {
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+    .lock-icon {
+      font-size:4em;
+      margin-bottom:20px;
+      transition: transform 0.5s ease, color 0.5s ease;
+    }
+    .shake { animation: shakeAnim 0.5s; }
+    @keyframes shakeAnim {
+      0%,100%{transform:translateX(0);}
+      25%{transform:translateX(-10px);}
+      75%{transform:translateX(10px);}
+    }
+
+    #enter-screen, #main-screen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 50px 20px;
+    }
+    #enter-screen { display: none; }
+    #main-screen { display: none; }
+
+    h1 {
+      font-size: 4em;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 6px #000;
+      animation: popIn 1.5s ease;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .message {
+      font-size: 1.5em;
+      line-height: 1.7;
+      margin: 20px 0;
+      max-width: 750px;
+      text-shadow: 1px 1px 3px #000;
+      opacity: 0;
+      animation: fadeInUp 2s ease forwards;
+    }
+    .message:nth-child(2) { animation-delay: 1s; }
+    .message:nth-child(3) { animation-delay: 2s; }
+    .message:nth-child(4) { animation-delay: 3s; }
+    .message:nth-child(5) { animation-delay: 4s; }
+    @keyframes fadeInUp {
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    input {
+      padding: 12px 20px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 8px;
+      margin-top: 12px;
+      outline: none;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 28px;
+      font-size: 1.2em;
+      background: linear-gradient(45deg, #ff6f91, #ff9671);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover { transform: scale(1.05); }
+    img {
+      width: 450px;
+      margin-top: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    iframe {
+      margin: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    .confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .confetti-piece {
+      position: absolute;
+      background-color: #fff;
+      opacity: 0.85;
+      animation: fall 5s linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-120px) rotate(0); }
+      100% { transform: translateY(110vh) rotate(720deg); }
+    }
+    #scratch-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      color: #fff;
+      font-size: 2em;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Floating Music Button */
+    #music-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: none;
+      background: #ff6f91;
+      color: white;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 200;
+      transition: transform 0.2s;
+    }
+    #music-toggle:hover { transform: scale(1.1); }
+
+    /* Responsive */
+    @media(max-width:768px) {
+      h1 {font-size:2em;}
+      img, iframe {width:100%; height:auto;}
+      .message {font-size:1.1em;}
+      input, button {width:100%; max-width:300px;}
+      #music-toggle {width:45px; height:45px; font-size:1.2em;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/11/27/audio_2b2e905f6e.mp3?filename=birthday-celebration-368842.mp3" type="audio/mpeg">
+  </audio>
+  <button id="music-toggle">🔊</button>
+
+  <p style="font-size:14px; margin:5px; color:#fff;">
+    Music by <a href="https://pixabay.com/users/mfcc-28627740/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=368842" target="_blank" style="color:#FFD700;">Mykola Sosin</a> from 
+    <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=368842" target="_blank" style="color:#FFD700;">Pixabay</a>
+  </p>
+
+  <!-- Lock Screen -->
+  <div id="lock-screen">
+    <div class="lock-icon" id="lockIcon">🔒</div>
+    <h2>Enter Password to Unlock Surprise 🎁</h2>
+    <input type="password" id="pwdInput" placeholder="Enter password..." />
+    <button onclick="checkPassword()">Unlock</button>
+  </div>
+
+  <!-- Enter Name Screen -->
+  <div id="enter-screen">
+    <h2>Enter your name to unlock your birthday surprise 🎁</h2>
+    <input type="text" id="nameInput" placeholder="Type your name..." />
+    <button onclick="revealSurprise()">Reveal</button>
+  </div>
+
+  <!-- Main Birthday Surprise Screen -->
+  <div id="main-screen">
+    <div class="confetti" id="confetti"></div>
+    <div id="scratch-overlay">✨ Scratch Here ✨</div>
+
+    <h1 id="greeting">Happy 22nd Birthday!</h1>
+
+    <div class="message">🎉 Wishing you endless happiness & success!</div>
+    <div class="message">💖 பிறந்த நாள் வாழ்த்து<br><br> ... Tamil wishes ...</div>
+    <div class="message">🎂 பிறந்த நாள் வாழ்த்துகள்! நீண்ட நாள் வாழ்க!</div>
+    <div class="message">🫶 கவலை வேண்டாம், நான் கடைசி வரை உனக்குடன் இருப்பேன்!</div>
+    <div class="message">Once again happy birthday da cheloo❤️</div>
+    <div class="message">Ne epayum edhe mari happy ya irukanum da 🤗</div>
+    <div class="message">Ne asa pata elame unaku kedaikium da cheloo❤️!</div>
+    <div class="message">Athai Mama soldradha olunga kekanum ✨</div>
+    <div class="message">ne epo epdi padikiriya edhe mari edha vida super ra padikanum athai mama ku lam ne peruma sekanum 🎓 </div>
+    <div class="message">Namba rendu perume nala padichi sekiram oru nala velaiki poganum da athai mama amma naina meme kana naina elarayum pathukanum 💕 </div>
+    <div class="message">Ne na enaku avalo pudikium da en pudikium edhuku pudikium nu la theriyadhu ana pudikium ❤️😅 </div>
+    <div class="message">Una endha alavuku pudikium mo adhe alavuku en athai mama akka va romba romba pudikium da na romba lucky theriyuma epdi pata family kedaika 💕💕 </div>
+    <div class="message">Aprm ne en life la vandha aprm dhan da enku elame oru alavuku theriya vandhadhu life na epdi dhan irukum na oru boundry la ye irundhu te la adhan 😅❤️ </div>
+    <div class="message">adigama sirachadhum unala dhan 😊💕aludha dhu unala dhan da 😅❤️ </div>
+    <div class="message">Unaku edhu pudichi irukum nu neiakire da edho enala mudhinjadhu simple la dhan iruku la 😅❤️ </div>
+    <div class="message">Once again happy birthday da cheloo❤️</div>
+    <img src="https://source.unsplash.com/600x400/?birthday,cake" alt="Birthday Surprise" />
+
+    <!-- Google Drive videos -->
+    <div style="margin-top:40px;">
+      <iframe class="video-frame" src="https://drive.google.com/file/d/1P7Bo2M5ikMvDVhDKguZNSBzOtqznKtfb/preview" width="420" height="240" allow="autoplay" frameborder="0" allowfullscreen></iframe>
+      <iframe class="video-frame" src="https://drive.google.com/file/d/1Mui9OmjDiLtB3GA5eya_8HlscgUVhBm0/preview" width="420" height="240" allow="autoplay" frameborder="0" allowfullscreen></iframe>
+      <iframe class="video-frame" src="https://drive.google.com/file/d/1KNnkqMP9TKlSkmPwD_a-cBlV79yC348Q/preview" width="420" height="240" allow="autoplay" frameborder="0" allowfullscreen></iframe>
+      <iframe class="video-frame" src="https://drive.google.com/file/d/1qietQ08nsnyQJ9Ri4jFg5KxOvBtoJb6E/preview" width="420" height="240" allow="autoplay" frameborder="0" allowfullscreen></iframe>
+      <iframe class="video-frame" src="https://drive.google.com/file/d/1U4K3qLjhd8mVqK3sOHhSyLiC9UAtfFO0/preview" width="420" height="240" allow="autoplay" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-toggle");
+    let isPlaying = false;
+
+    function checkPassword() {
+      const pwd = document.getElementById("pwdInput").value;
+      const lock = document.getElementById("lockIcon");
+      if (pwd === "happy22") {
+        lock.textContent = "🔓";
+        lock.style.color = "#00FF7F";
+        setTimeout(()=>{
+          document.getElementById("lock-screen").style.display="none";
+          document.getElementById("enter-screen").style.display="flex";
+        },1000);
+      } else {
+        lock.classList.add("shake");
+        setTimeout(()=>lock.classList.remove("shake"),500);
+        alert("❌ Wrong Password!");
+      }
+    }
+
+    function revealSurprise() {
+      const name = document.getElementById("nameInput").value.trim();
+      const displayName = name || "Vijay Kumar";
+      document.getElementById("enter-screen").style.display = "none";
+      document.getElementById("main-screen").style.display = "flex";
+      document.getElementById("greeting").textContent = `🎈 Happy 22nd Birthday, ${displayName}! 🎈`;
+      launchConfetti();
+      setupScratch();
+      bgMusic.play();
+      isPlaying = true;
+      musicBtn.textContent = "🔊";
+    }
+
+    function launchConfetti() {
+      const container = document.getElementById("confetti");
+      const colors = ["#FFD700", "#FF69B4", "#00BFFF", "#7CFC00", "#FF4500", "#FF1493"];
+      for (let i = 0; i < 150; i++) {
+        const piece = document.createElement("div");
+        piece.classList.add("confetti-piece");
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.animationDelay = Math.random() * 5 + "s";
+        const size = Math.random() * 8 + 8;
+        piece.style.width = size + "px";
+        piece.style.height = size + "px";
+        container.appendChild(piece);
+      }
+    }
+
+    function setupScratch() {
+      const overlay = document.getElementById("scratch-overlay");
+      overlay.addEventListener("click", () => {
+        overlay.style.transition = "opacity 1.5s ease";
+        overlay.style.opacity = 0;
+        setTimeout(() => overlay.style.display = "none", 1500);
+      });
+    }
+
+    // Music toggle button
+    musicBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        bgMusic.pause();
+        musicBtn.textContent = "🔈";
+      } else {
+        bgMusic.play();
+        musicBtn.textContent = "🔊";
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Pause music when hovering over video (optional)
+    document.querySelectorAll(".video-frame").forEach(frame => {
+      frame.addEventListener("mouseenter", () => bgMusic.pause());
+      frame.addEventListener("mouseleave", () => { if (isPlaying) bgMusic.play(); });
+    });
+  </script>
+</body>
+</html>
+
